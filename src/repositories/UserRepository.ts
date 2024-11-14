@@ -8,9 +8,13 @@ class UserRepository {
         try {
             const response = await prisma.user.create({ data })
             return response
-        } catch (error) {
-            console.error(error)
-            throw new Error("Failed to create user")
+        } catch (err) {
+            if (err instanceof Error) {
+                throw new Error("Error: " + err.message)
+            }
+            else {
+                throw new Error("Failed to create user")
+            }
         }
     }
 

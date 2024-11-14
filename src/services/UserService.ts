@@ -12,6 +12,10 @@ class UserService {
                 throw new Error("REQUIRED_PROPERTIES_MISSING")
             }
 
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
+                throw new Error("INVALID_CREDENTIALS");
+            }
+
             const data = await userRepository.create({
                 id: uuidv4(),
                 userName: user.userName,
