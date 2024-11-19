@@ -14,7 +14,6 @@ describe('Testing user service operations', () => {
     beforeEach(async () => {
         try {
             await prisma.user.deleteMany();
-            console.log('Usuários excluídos');
         } catch (error) {
             console.error('Erro connecting to database: ' + error);
         }

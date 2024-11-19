@@ -7,6 +7,7 @@ export const catchErrorResponse = async (res: Response, statusCode: number, erro
         error_description: errorDescription,
     };
     return res.status(statusCode).json({
+        statusCode: statusCode,
         message: message,
         errorResponse
     });
