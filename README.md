@@ -97,6 +97,32 @@ bun dev
 
 ```
 
-The application will run at the following address: http://localhost:5000.
+The application will run at the following address: [http://localhost:5000.](http://localhost:5000)
 
-...
+
+## Documentation
+
+This project uses a variety of dependencies to support its functionality, ranging from development tools to runtime libraries. 
+
+Below is a detailed overview of the libraries used:
+
+### Dependencies
+
+These are essential for the core functionality of the application:
+
+- [typescript](https://www.typescriptlang.org): TypeScript compiler for type checking and transpilation.
+- [prisma](https://www.prisma.io): CLI tool for managing Prisma migrations and database interactions.
+- [@prisma/client](https://www.prisma.io/docs/orm/prisma-client): Provides a type-safe ORM to interact with the database.
+- [jest](https://jestjs.io): JavaScript testing framework for unit and integration tests.
+- [supertest](https://www.npmjs.com/package/supertest): Library for testing HTTP endpoints.
+- [ts-jest](https://www.npmjs.com/package/ts-jest): Enables Jest to work with TypeScript.
+- [@google/generative-ai](https://www.npmjs.com/package/@google/generative-ai): Integrates Google's generative AI for advanced image processing and content generation.
+- [body-parser](https://www.npmjs.com/package/body-parser): Middleware for parsing incoming request bodies in JSON format.
+- [cross-env](https://www.npmjs.com/package/cross-env): Enables setting environment variables across different operating systems.
+- [dotenv](https://www.npmjs.com/package/dotenv): Loads environment variables from a .env file into process.env.
+- [express](https://expressjs.com): The main framework used for building the back-end.
+- [http-errors](https://www.npmjs.com/package/http-errors): Simplifies creating HTTP error responses.
+- [morgan](https://www.npmjs.com/package/morgan): Logs HTTP requests for debugging purposes.
+- [multer](https://www.npmjs.com/package/multer): Handles file uploads, especially useful for processing images.
+- [nodemon](https://www.npmjs.com/package/nodemon): Automatically restarts the application during development when file changes are detected.
+- [uuid](https://www.npmjs.com/package/uuid): Generates unique IDs for data objects.
