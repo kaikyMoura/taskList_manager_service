@@ -18,6 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get("/", (req, res) => res.send("Welcome to the TasList Manager. See the documentation and learn how to use the endpoints"));
+
 app.use(userRoutes)
 app.use(taskRoutes)
 

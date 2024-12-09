@@ -34,11 +34,11 @@ USER node
 
 COPY .env .env
 
-RUN npx prisma migrate
+#RUN npx prisma migrate deploy
 
 RUN npx prisma generate
 
-EXPOSE 3000
+EXPOSE 5000
 
 # Run the application
 CMD ["npm", "run", "start"]
