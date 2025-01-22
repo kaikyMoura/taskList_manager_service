@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { User } from '.prisma/client';
+import { PrismaClient, User } from '@prisma/client';
+
 
 const prisma = new PrismaClient();
 
@@ -24,6 +24,34 @@ class UserRepository {
                 where: { id: id, }
             });
             return data!;
+        }
+        catch (error) {
+            console.error(error)
+            throw new Error("Failed to retrieve user")
+        }
+    }
+
+    async findUniqueByEmail(email: string): Promise<User> {
+        try {
+            const data = await prisma.user.findUnique({
+                where: { email: email, }
+            });
+            return data!;
+        }
+        catch (error) {
+            console.error(error)
+            throw new Error("Failed to retrieve user")
+        }
+    }
+
+    async findUniqueByCredentials(user: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'tasks'>): Promise<User> {
+        try {
+            const response = await prisma.user.findUnique({
+                where: {
+                    email: user.email, user_password: user.user_password
+                }
+            });
+            return response!;
         }
         catch (error) {
             console.error(error)

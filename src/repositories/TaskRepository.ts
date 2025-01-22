@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-import { Task } from './../../node_modules/.prisma/client/index.d';
+import { PrismaClient, Task } from '@prisma/client';
 
 const prisma = new PrismaClient();
 

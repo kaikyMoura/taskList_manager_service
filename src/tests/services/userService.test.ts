@@ -27,6 +27,7 @@ describe('Testing user service operations', () => {
         const newUser = {
             userName: "JoaoGrilo123",
             email: "testt@gmail.com",
+            password: "123456"
         }
         const response = await userService.createUser(newUser);
 

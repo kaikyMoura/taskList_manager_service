@@ -4,6 +4,25 @@ import { catchErrorResponse } from "../exception/CatchErrorResponse";
 
 class UserController {
 
+    async login(req: Request, res: Response) {
+        const user = req.body
+
+        try {
+            return res.status(200).json(await userService.retrieveUserByCredentials(user))
+        }
+        catch (err) {
+            console.error(err)
+            if (err === "REQUIRED_PROPERTIES_MISSING") {
+                throw catchErrorResponse(res, 400, "REQUIRED_PROPERTIES_MISSING", "Missing required properties", "Some required properties are missing from the request.")
+            }
+            else {
+                throw catchErrorResponse(res, 500, "INTERNAL_SERVER_ERROR", "Internal server error",
+                    "An error occurred while processing the operation. Please try again or contact support if the issue persists.")
+            }
+        }
+    }
+
+
     async createUser(req: Request, res: Response) {
         const user = req.body
 
@@ -41,7 +60,7 @@ class UserController {
         }
     }
 
-    async updateUder(req: Request, res: Response) {
+    async updateUser(req: Request, res: Response) {
         const { id } = req.params
         const user = req.body
         try {

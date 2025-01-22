@@ -1,9 +1,8 @@
-import { Priority, Status } from '.prisma/client';
+import { Priority, Status, Task } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 import { ResponseModel } from '../model/ResponseModel';
 import taskRepository from '../repositories/TaskRepository';
 import userRepository from '../repositories/UserRepository';
-import { Task } from './../../node_modules/.prisma/client/index.d';
 
 class TaskService {
 
