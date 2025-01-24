@@ -44,21 +44,6 @@ class UserRepository {
         }
     }
 
-    async findUniqueByCredentials(user: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'tasks'>): Promise<User> {
-        try {
-            const response = await prisma.user.findUnique({
-                where: {
-                    email: user.email, user_password: user.user_password
-                }
-            });
-            return response!;
-        }
-        catch (error) {
-            console.error(error)
-            throw new Error("Failed to retrieve user")
-        }
-    }
-
     async findMany(): Promise<User[]> {
         try {
             return await prisma.user.findMany();

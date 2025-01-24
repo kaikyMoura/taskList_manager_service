@@ -6,9 +6,9 @@ class UserController {
 
     async login(req: Request, res: Response) {
         const user = req.body
-
         try {
-            return res.status(200).json(await userService.retrieveUserByCredentials(user))
+            const token = await userService.retrieveUserByCredentials(user)
+            return res.status(200).json({ token: token })
         }
         catch (err) {
             console.error(err)

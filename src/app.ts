@@ -24,4 +24,8 @@ app.get("/", (req: Request, res: Response) => {
 app.use(userRoutes)
 app.use(taskRoutes)
 
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
 export default app;

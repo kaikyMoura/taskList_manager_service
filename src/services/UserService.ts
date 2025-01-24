@@ -3,10 +3,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { ResponseModel } from '../model/ResponseModel';
 import userRepository from "../repositories/UserRepository";
 import { compare, hash } from 'bcryptjs';
+import generateToken from '../utils/token';
 
+const saltRounds = 10;
 class UserService {
 
-    async retrieveUserByCredentials(user: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'tasks'>): Promise<ResponseModel<Omit<User, 'id' | 'updatedAt' | 'createdAt'>>> {
+    async retrieveUserByCredentials(user: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'tasks'>): Promise<String> {
         try {
             if (!user || !user.email || !user.user_password) {
                 throw new Error("REQUIRED_PROPERTIES_MISSING")
@@ -14,23 +16,17 @@ class UserService {
 
             const retrivedUser = await userRepository.findUniqueByEmail(user.email)
 
+            if (!retrivedUser) {
+                throw new Error("USER_NOT_FOUND")
+            }
+
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email) || retrivedUser.email != user.email || !await compare(user.user_password, retrivedUser.user_password)) {
                 throw new Error("INVALID_CREDENTIALS");
             }
 
-            const data = await userRepository.findUniqueByCredentials({
-                user_name: user.user_name,
-                email: user.email,
-                user_password: user.user_password
-            })
+            const token = generateToken(retrivedUser.id);
 
-            if (!user) {
-                throw new Error("USER_NOT_FOUND")
-            }
-
-            return {
-                data: data
-            }
+            return token
         }
         catch (err) {
             console.error(err)
@@ -44,7 +40,6 @@ class UserService {
     }
 
     async createUser(user: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'tasks'>): Promise<ResponseModel<Omit<User, 'id' | 'user_password' | 'createdAt' | 'updatedAt' | 'tasks'>>> {
-        const saltRounds = 10;
         try {
 
             if (!user.user_name || !user.email) {

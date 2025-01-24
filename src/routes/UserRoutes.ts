@@ -5,13 +5,11 @@ import authenticateToken from "../middlewares/auth";
 const userRoutes = Router()
 
 userRoutes.post('/user/create', (req, res) => { userController.createUser(req, res) });
-userRoutes.post('/user/login', (req, res) => { userController.createUser(req, res) });
-userRoutes.delete('/user/delete/:user_id', (req, res) => {
-    authenticateToken
+userRoutes.post('/user/login', (req, res) => { userController.login(req, res) });
+userRoutes.delete('/user/delete/:user_id', authenticateToken, (req, res) => {
     userController.deleteUser(req, res)
 });
-userRoutes.put('/user/update/:user_id', (req, res) => {
-    authenticateToken
+userRoutes.put('/user/update/:user_id', authenticateToken, (req, res) => {
     userController.updateUser(req, res)
 });
 
