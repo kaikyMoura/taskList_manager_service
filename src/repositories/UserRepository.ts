@@ -1,4 +1,4 @@
-import { PrismaClient, User } from '@prisma/client';
+import { Prisma, PrismaClient, User } from '@prisma/client';
 
 
 const prisma = new PrismaClient();
@@ -6,7 +6,15 @@ const prisma = new PrismaClient();
 class UserRepository {
     async create(data: Omit<User, 'createdAt' | 'updatedAt' | 'tasks'>): Promise<User> {
         try {
-            const response = await prisma.user.create({ data })
+            const response = await prisma.user.create({
+                data: {
+                    id: data.id,
+                    user_name: data.user_name,
+                    email: data.email,
+                    user_password: data.user_password,
+                    user_avatar_options: data.user_avatar_options as Prisma.InputJsonValue
+                }
+            })
             return response
         } catch (err) {
             if (err instanceof Error) {

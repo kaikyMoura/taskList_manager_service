@@ -1,10 +1,9 @@
-import { Prisma, User } from '@prisma/client';
+import { User } from '@prisma/client';
+import { compare, hash } from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 import { ResponseModel } from '../model/ResponseModel';
 import userRepository from "../repositories/UserRepository";
-import { compare, hash } from 'bcryptjs';
 import generateToken from '../utils/token';
-import googleStorageService from './GoogleStorageService';
 
 const saltRounds = 10;
 class UserService {
@@ -40,13 +39,13 @@ class UserService {
         }
     }
 
-    async createUser(user: Omit<User, 'id' | 'user_avatar_options ' | 'user_avatar_url' | 'createdAt' | 'updatedAt' | 'tasks'>, image: Express.Multer.File): Promise<ResponseModel<Omit<User, 'id' | 'user_password' | 'createdAt' | 'updatedAt' | 'tasks'>>> {
-        if (!image) {
-            throw new Error('FILE_NOT_FOUND')
-        }
-        const imageBuffered = image.buffer
+    async createUser(user: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'tasks'>): Promise<ResponseModel<Omit<User, 'id' | 'user_avatar_options' | 'user_avatar_url' | 'user_password' | 'createdAt' | 'updatedAt' | 'tasks'>>> {
+        // if (!image) {
+        //     throw new Error('FILE_NOT_FOUND')
+        // }
+        //const imageBuffered = image.buffer
 
-        const storageResponse = await googleStorageService.uploadFileToGCS(imageBuffered)
+        //const storageResponse = await googleStorageService.uploadFileToGCS(imageBuffered)
 
         try {
 
@@ -58,22 +57,21 @@ class UserService {
                 throw new Error("INVALID_CREDENTIALS");
             }
 
-            const userAvatarOptions: Prisma.InputJsonValue = "null";
-
-
             await userRepository.create({
                 id: uuidv4(),
                 user_name: user.user_name,
                 email: user.email,
                 user_password: await hash(user.user_password, saltRounds),
-                user_avatar_url: storageResponse.image_url
+                user_avatar_options: user.user_avatar_options
             })
+
+            // user_avatar_url: storageResponse.image_url
+
             return {
                 message: "User created successfully",
                 data: {
                     user_name: user.user_name,
                     email: user.email,
-                    user_avatar_url: storageResponse.temp_url
                 }
             }
         }

@@ -3,12 +3,13 @@ import userController from "../controllers/UserController";
 import authenticateToken from "../middlewares/auth";
 import multer from 'multer';
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
+//const storage = multer.memoryStorage();
+//const upload = multer({ storage });
 
 const userRoutes = Router()
 
-userRoutes.post('/user/create', upload.single('file'), (req, res) => {
+//upload.single('file')
+userRoutes.post('/user/create', (req, res) => {
     userController.createUser(req, res)
 });
 userRoutes.post('/user/login', (req, res) => { userController.login(req, res) });

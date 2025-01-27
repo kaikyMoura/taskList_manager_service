@@ -26,10 +26,10 @@ class UserController {
 
     async createUser(req: Request, res: Response) {
         const user = req.body
-        const file = req.file!
+        //const file = req.file!
 
         try {
-            const result = await userService.createUser(user, file)
+            const result = await userService.createUser(user)
             return res.status(200).json(result)
         }
         catch (err) {

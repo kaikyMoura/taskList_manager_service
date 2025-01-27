@@ -31,7 +31,6 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@google-cloud/storage": "^7.15.0",
     "@google/generative-ai": "^0.17.2",
     "@prisma/client": "^6.2.1",
     "bcryptjs": "^2.4.3",
