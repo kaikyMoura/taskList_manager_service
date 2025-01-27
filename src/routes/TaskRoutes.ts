@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
-import taskController from '../controllers/TaskController';
 import multer from 'multer';
+import taskController from '../controllers/TaskController';
 import authenticateToken from '../middlewares/auth';
 
 const taskRoutes = Router()
@@ -20,8 +20,8 @@ taskRoutes.put('/task/update/:task_id', authenticateToken, (req: Request, res: R
 taskRoutes.get('/task/list/:user_id', authenticateToken, (req: Request, res: Response) => {
     taskController.findAllUserTasks(req, res)
 });
-taskRoutes.post('/task/load', upload.single('file'), authenticateToken, (req: Request, res: Response) => {
-    taskController.getTasksDataFromImage(req, res)
-});
+// taskRoutes.post('/task/load', upload.single('file'), authenticateToken, (req: Request, res: Response) => {
+//     taskController.getTasksDataFromImage(req, res)
+// });
 
 export default taskRoutes;

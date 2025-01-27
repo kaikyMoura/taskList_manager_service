@@ -5,7 +5,8 @@ import { catchErrorResponse } from "../exception/CatchErrorResponse";
 class UserController {
 
     async login(req: Request, res: Response) {
-        const user = req.body
+        const user = req.body;
+
         try {
             const token = await userService.retrieveUserByCredentials(user)
             return res.status(200).json({ token: token })
@@ -25,15 +26,22 @@ class UserController {
 
     async createUser(req: Request, res: Response) {
         const user = req.body
+        const file = req.file!
 
         try {
-            const result = await userService.createUser(user)
+            const result = await userService.createUser(user, file)
             return res.status(200).json(result)
         }
         catch (err) {
             console.error(err)
             if (err === "REQUIRED_PROPERTIES_MISSING") {
                 throw catchErrorResponse(res, 400, "REQUIRED_PROPERTIES_MISSING", "Missing required properties", "Some required properties are missing from the request.")
+            }
+            if (err === "FILE_NOT_FOUND") {
+                throw catchErrorResponse(res, 404, "FILE_NOT_FOUND", "The file was not found")
+            }
+            if (err === "INVALID_CREDENTIALS") {
+                throw catchErrorResponse(res, 401, "INVALID_CREDENTIALS", "Invalid credentials provided", "Please check your credentials before trying again.")
             }
             else {
                 throw catchErrorResponse(res, 500, "INTERNAL_SERVER_ERROR", "Internal server error",

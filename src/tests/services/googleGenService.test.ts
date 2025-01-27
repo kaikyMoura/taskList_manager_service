@@ -3,7 +3,7 @@ jest.useRealTimers()
 import { PrismaClient } from "@prisma/client";
 
 import { config } from "dotenv";
-import googleGenAiService from '../../services/GoogleGenAiService';
+import googleGenAiService from '../../services/GoogleStorageService';
 
 
 const prisma = new PrismaClient();
