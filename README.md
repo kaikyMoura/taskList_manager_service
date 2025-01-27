@@ -132,3 +132,28 @@ These are essential for the core functionality of the application:
 - [multer](https://www.npmjs.com/package/multer): Handles file uploads, especially useful for processing images.
 - [nodemon](https://www.npmjs.com/package/nodemon): Automatically restarts the application during development when file changes are detected.
 - [uuid](https://www.npmjs.com/package/uuid): Generates unique IDs for data objects.
+
+## Usage
+
+- To use this locally, start by creating an account in the [Google Cloud console](https://console.cloud.google.com/).Next, you'll need to set up a Billing account (don’t worry, you can use it for free—just set up alerts to ensure you don’t exceed the $300 credit limit). Once that’s done, create a service account (you can configure it with admin credentials if needed). From there, you can download a key to use locally under the Keys section. I recommend following the Google Cloud documentation for a step-by-step guide, as it covers all the actions you can take and how to execute them. And don’t forget to create a bucket—just search for “Cloud Storage” in the search bar, and from there, you can create and configure your bucket.
+
+- Useful Tutorials:
+- [Starting free trial and creating a project](https://youtu.be/NNPtzkCFFBw)
+
+- [Billing account](https://support.uidaho.edu/TDClient/40/Portal/KB/ArticleDet?ID=2462)
+
+- [IAM documentation to create a service account](https://cloud.google.com/iam/docs/service-accounts-create?hl=pt-br)
+
+- For using the Generative API and Cloud Storage, check the following documentation:
+  
+- [Gemmini Ai Api docs](https://cloud.google.com/docs/generative-ai)
+
+- [Google Cloud Storage Node.js Client Library](https://cloud.google.com/nodejs/docs/reference/storage/latest)
+
+- After completing the setup, simply add your credentials file to the root of your project and specify the bucket name:
+
+![Vs Code](https://github.com/user-attachments/assets/038fc99f-cfd6-4f5b-a7b7-e69846d964b1)
+
+And:
+
+![Captura de Tela (36)](https://github.com/user-attachments/assets/1d62210d-fc28-4ac6-8b32-9cfa49ec5672)
