@@ -2,12 +2,17 @@
 
 
 ## Introduction
-This project represents the back-end implementation of the TaskList_Manager, a WebApp/PWA designed for task management.
+
+This project represents the back-end implementation of the TaskQuest, a WebApp designed for task management.
 
 The application was developed using Express and TypeScript, leveraging modern technologies such as Google GenAI for image processing to enhance functionality and provide an efficient user experience.
 
 
 ## Installation
+
+### - Important:
+
+In this project, I’m using pnpm, but feel free to use any package manager of your choice. Just refer to the documentation for guidance on how to use it effectively.
 
 ### 1. Check Node.js Version
 
@@ -91,7 +96,7 @@ npm run dev
 # or
 yarn dev
 # or
-pnpm dev
+pnpm run dev
 # or
 bun dev
 
@@ -117,6 +122,7 @@ These are essential for the core functionality of the application:
 - [supertest](https://www.npmjs.com/package/supertest): Library for testing HTTP endpoints.
 - [ts-jest](https://www.npmjs.com/package/ts-jest): Enables Jest to work with TypeScript.
 - [@google/generative-ai](https://www.npmjs.com/package/@google/generative-ai): Integrates Google's generative AI for advanced image processing and content generation.
+- [@google-cloud/storage](https://www.npmjs.com/package/@google-cloud/storage): Provides a powerful and scalable solution for managing files in Google Cloud Storage, including uploads, downloads, and bucket operations.
 - [body-parser](https://www.npmjs.com/package/body-parser): Middleware for parsing incoming request bodies in JSON format.
 - [cross-env](https://www.npmjs.com/package/cross-env): Enables setting environment variables across different operating systems.
 - [dotenv](https://www.npmjs.com/package/dotenv): Loads environment variables from a .env file into process.env.
