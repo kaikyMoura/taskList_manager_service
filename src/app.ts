@@ -1,16 +1,21 @@
-import { config } from 'dotenv';
 import express, { Request, Response } from 'express';
 import logger from 'morgan';
 import path from 'path';
 import taskRoutes from './routes/TaskRoutes';
 import userRoutes from './routes/UserRoutes';
-import * as dotenv from 'dotenv';
+import cors from 'cors';
 
 const app = express();
 
 const environment = process.env.NODE_ENV || 'dev'
 
 console.log(`Environment: ${environment}`);
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+    optionsSuccessStatus: 200
+}))
 
 app.use(logger('combined'));
 app.use(express.json());
