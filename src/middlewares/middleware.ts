@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
+import generateToken from "../utils/token";
 var jwt = require('jsonwebtoken');
 
 export default async function authenticateToken(req: Request, res: Response, next: NextFunction) {
@@ -13,10 +14,16 @@ export default async function authenticateToken(req: Request, res: Response, nex
     try {
         jwt.verify(token, process.env.JWT_SECRET, (err: Error, user: User) => {
             if (err) {
-                return res.status(403).json({ message: 'Token expired.' });
-            }
-            req.body = user;
+                // If token expires, tries to generate a new token
+                const newToken = generateToken(user.id)
 
+                res.setHeader('Authorization', `Bearer ${newToken}`);
+
+                req.body = user;
+                return next();
+            }
+
+            req.body = user;
             next();
         });
     }

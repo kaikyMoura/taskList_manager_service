@@ -8,8 +8,8 @@ class UserController {
         const user = req.body;
 
         try {
-            const token = await userService.retrieveUserByCredentials(user)
-            return res.status(200).json({ token: token })
+            const result = await userService.retrieveUserByCredentials(user)
+            return res.status(200).json({ token: result })
         }
         catch (err) {
             console.error(err)

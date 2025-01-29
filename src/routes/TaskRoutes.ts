@@ -1,12 +1,12 @@
 import { Request, Response, Router } from 'express';
-import multer from 'multer';
+//import multer from 'multer';
 import taskController from '../controllers/TaskController';
-import authenticateToken from '../middlewares/auth';
+import authenticateToken from '../middlewares/middleware';
 
 const taskRoutes = Router()
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
+//const storage = multer.memoryStorage();
+//const upload = multer({ storage });
 
 taskRoutes.post('/task/create', authenticateToken, (req: Request, res: Response) => {
     taskController.create(req, res)

@@ -1,7 +1,6 @@
 import { Router } from "express";
 import userController from "../controllers/UserController";
-import authenticateToken from "../middlewares/auth";
-import multer from 'multer';
+import authenticateToken from "../middlewares/middleware";
 
 //const storage = multer.memoryStorage();
 //const upload = multer({ storage });

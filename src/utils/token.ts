@@ -7,6 +7,7 @@ export default async function generateToken(userId: string): Promise<String> {
         expiresIn: '1h'
     };
 
-    const token = jwt.sign(payload, secretKey, options); 
-    return token;
+    const token = jwt.sign(payload, secretKey, options);
+
+    return token
 }

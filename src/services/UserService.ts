@@ -8,7 +8,7 @@ import generateToken from '../utils/token';
 const saltRounds = 10;
 class UserService {
 
-    async retrieveUserByCredentials(user: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'tasks'>): Promise<String> {
+    async retrieveUserByCredentials(user: Omit<User, 'id' | 'user_name' | 'createdAt' | 'updatedAt' | 'tasks'>): Promise<String> {
         try {
             if (!user || !user.email || !user.user_password) {
                 throw new Error("REQUIRED_PROPERTIES_MISSING")
